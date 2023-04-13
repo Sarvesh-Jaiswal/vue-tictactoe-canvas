@@ -1,0 +1,14 @@
+$app_Height: var(--appHeight, 100%);
+
+html,
+body {
+  height: $app_Height;
+  // cursor: url("./cursor.cur"), auto;
+  margin: 0;
+  overflow: hidden;
+}
+
+#app {
+  background-color: #000000;
+  height: 100%;
+}
