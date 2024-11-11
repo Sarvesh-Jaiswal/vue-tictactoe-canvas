@@ -17,22 +17,22 @@ export class Board {
   }
 
   get isBoardFull(): boolean {
-    let returnValue = true;
+    let _isBoardFull = true;
     this.board.forEach((row: BoardValue[]) => {
       row.forEach((value: BoardValue) => {
-        if (!value) returnValue = false;
+        if (!value) _isBoardFull = false;
       });
     });
-    return returnValue;
+    return _isBoardFull;
   }
 
   get strokedRow(): number | undefined {
     for (let row = 1; row <= 3; row++) {
-        const value = this.isLineStroke(
-          { row, column:1 },
-          { row, column:2 },
-          { row, column:3 }
-        );
+      const value = this.isLineStroke(
+        { row, column: 1 },
+        { row, column: 2 },
+        { row, column: 3 }
+      );
       if (value) return row;
     }
     return undefined;
@@ -40,11 +40,11 @@ export class Board {
 
   get strokedColumn(): number | undefined {
     for (let column = 1; column <= 3; column++) {
-        const value = this.isLineStroke(
-          { row:1, column },
-          { row:2, column },
-          { row:3, column }
-        );
+      const value = this.isLineStroke(
+        { row: 1, column },
+        { row: 2, column },
+        { row: 3, column }
+      );
       if (value) return column;
     }
     return undefined;
@@ -53,16 +53,13 @@ export class Board {
   get strokedDaigonal(): number | undefined {
     if (this.isDaigonalStroked(true)) return 1;
     if (this.isDaigonalStroked()) return 2;
-    return 
+    return;
   }
 
   isDaigonalStroked(left?: boolean) {
-    const firstBox = {row:1, column: left ? 1: 3};
-    const thirdBox = {row:3, column: left ? 3: 1};
-    return this.isLineStroke(
-      firstBox,
-      {row:2, column:2},
-      thirdBox)
+    const firstBox = { row: 1, column: left ? 1 : 3 };
+    const thirdBox = { row: 3, column: left ? 3 : 1 };
+    return this.isLineStroke(firstBox, { row: 2, column: 2 }, thirdBox);
   }
 
   isLineStroke(
@@ -75,7 +72,7 @@ export class Board {
     const stroke =
       board[firstBox.row - 1][firstBox.column - 1] != undefined &&
       board[firstBox.row - 1][firstBox.column - 1] ==
-        board[secondBox.row - 1][secondBox.column -1 ] &&
+        board[secondBox.row - 1][secondBox.column - 1] &&
       board[secondBox.row - 1][secondBox.column - 1] ==
         board[thirdBox.row - 1][thirdBox.column - 1];
     return stroke;
